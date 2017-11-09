@@ -1,0 +1,16 @@
+body{
+    text-align: center;
+}
+#add{
+    height: 200px;
+    width: 200px;
+    background-color: blue;
+    font-size: 20pt;
+}
+#reset{
+    display: block;
+    background-color: red;
+    margin: auto;
+    margin-top: 5%;
+    font-size: 14pt;
+}

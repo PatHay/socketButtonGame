@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type ="text/javascript">
+        $(document).ready(function (){
+        	// triggers the connection event in our server!
+            var socket = io.connect();
+            // submit data to the server using emit
+            $('#add').click(function(e) {
+        		e.preventDefault();
+				socket.emit("count", {});
+            });
+            $('#reset').click(function(e){
+                e.preventDefault();
+                socket.emit("reset", {});
+            });
+        	//display the emit response of the server called "updated_message" and "random_number"
+			// socket.on('updated_message', function (data){
+			//     $('#message').html("You emitted the following information to the server: " + JSON.stringify(data.response));
+			// });
+			// socket.on('random_number', function (data){
+			//    $('#number').html("Your lucky number emitted by the server is : " + JSON.stringify(data.response));
+            // });
+            socket.on('counter', function (data){
+                $('#number'). html("The button has been pushed " + JSON.stringify(data.response) + " times");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1><div id="number"></div></h1>
+    <!-- <h1>The button has been pushed (placeholder) time(s)</h1> -->
+    <h3>Push the button to update the count!</h3>
+    <button id="add">Push the Epic Button</button>
+    <button id="reset">Reset count</button>
+</body>
+</html>
